@@ -32,7 +32,7 @@ export const confirmMessage = (type, date) => [
           text: '네 활동표에 기록해주세요',
         },
         style: 'primary',
-        value: ATTENDED,
+        value: `${ATTENDED} ${type} ${date}`,
       },
       {
         type: 'button',
