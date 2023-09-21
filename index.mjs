@@ -1,4 +1,4 @@
-import { sendText } from './src/utils/slackChat';
+import { sendText } from './src/utils/slackChat.js';
 
 export const handler = async (event) => {
   const to = process.env.TEST_CHANNEL;
