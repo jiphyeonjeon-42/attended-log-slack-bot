@@ -1,6 +1,8 @@
 import { ATTENDED } from '../constants/events.js';
+import { ATTENDTYPE, RAW_SHEET } from '../constants/sheet.js';
 import { successMessage } from '../messages/successMessage.js';
 import { parseEventBody } from '../utils/eventBody.js';
+import { httpClientForSheet } from '../utils/httpClientForSheet.js';
 import { sendBlocks } from '../utils/slackChat.js';
 
 export const receiveSlackInteraction = async (event) => {
@@ -13,9 +15,16 @@ export const receiveSlackInteraction = async (event) => {
   }
 
   const [type, date] = rest;
-  const userId = payload.user.id;
+  const { name, id } = payload.user;
 
-  // TODO 기록하는 로직 추가
+  await appendRecord(type, date, name).then(async () => {
+    await sendBlocks(id, successMessage(type, date));
+  });
+};
 
-  await sendBlocks(userId, successMessage(type, date));
+const appendRecord = async (type, date, user) => {
+  await httpClientForSheet.post(
+    `/${RAW_SHEET}:append?valueInputOption=USER_ENTERED`,
+    { values: [[ATTENDTYPE[type], date, user, '', true]] }
+  );
 };
