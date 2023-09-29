@@ -8,11 +8,9 @@ export const sendMeetingConfirmation = async () => {
   const today = new Date().toISOString().slice(5, 10);
   const message = confirmMessage(MEETING, today);
   const librarians = await getLibrariansFromSheet();
-
+  
   await Promise.all(
-    librarians.map((librarian) => {
-      sendBlocks(librarian, message);
-    })
+    librarians.map((librarian) => sendBlocks(librarian, message))
   );
 };
 
