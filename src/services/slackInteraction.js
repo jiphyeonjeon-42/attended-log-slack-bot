@@ -2,7 +2,7 @@ import { ATTENDED } from '../constants/events.js';
 import { ATTENDTYPE, RAW_SHEET } from '../constants/sheet.js';
 import { successMessage } from '../messages/successMessage.js';
 import { parseEventBody } from '../utils/eventBody.js';
-import { httpClientForSheet } from '../utils/httpClientForSheet.js';
+import { httpClientForSheet } from '../utils/httpClient.js';
 import { sendBlocks } from '../utils/slackChat.js';
 
 export const receiveSlackInteraction = async (event) => {
