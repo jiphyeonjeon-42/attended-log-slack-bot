@@ -1,9 +1,11 @@
 import { sendMeetingConfirmation } from './src/services/meeting.js';
+import { sendShiftConfirmation } from './src/services/shift.js';
 import { receiveSlackInteraction } from './src/services/slackInteraction.js';
 
 const Tasks = {
   slack: (event) => receiveSlackInteraction(event),
   meetings: () => sendMeetingConfirmation(),
+  shifts: () => sendShiftConfirmation(),
 };
 
 export const handler = async (event) => {

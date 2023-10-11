@@ -1,4 +1,6 @@
-export const SLACK_ID_RANGE = '별첨_월렛 지급 예정 현황!L5:L40';
+export const SLACK_ID_RANGE = '별첨_월렛 지급 예정 현황!M5:M40';
+export const TOGETHER_RANGE = '별첨_월렛 지급 예정 현황!L5:M40'; // 친바에서 파싱하기 위한 데이터
+
 export const RAW_SHEET = '별첨_raw data';
 export const ATTENDTYPE = {
   정기사서회의: '회의 참석',

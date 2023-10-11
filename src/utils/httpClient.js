@@ -13,3 +13,7 @@ export const httpClientForSheet = axios.create({
   baseURL: `https://sheets.googleapis.com/v4/spreadsheets/${spreadSheet}/values/`,
   headers: headers,
 });
+
+export const httpClientForTogether = axios.create({
+  baseURL: process.env.TOGETHER_ROTATION_URL,
+});
