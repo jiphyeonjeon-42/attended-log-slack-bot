@@ -1,5 +1,5 @@
-export const SLACK_ID_RANGE = '별첨_월렛 지급 예정 현황!M5:M50';
-export const TOGETHER_RANGE = '별첨_월렛 지급 예정 현황!L5:M50'; // 친바에서 파싱하기 위한 데이터
+export const SLACK_ID_RANGE = '별첨_월렛 지급 예정 현황!N5:N50';
+export const TOGETHER_RANGE = '별첨_월렛 지급 예정 현황!M5:N50'; // 친바에서 파싱하기 위한 데이터
 
 export const RAW_SHEET = '별첨_raw data';
 export const ATTENDTYPE = {
