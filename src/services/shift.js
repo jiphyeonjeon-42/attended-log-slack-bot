@@ -11,7 +11,7 @@ const WEEKS = [1, 2, 3, 4, 5];
 
 export const sendShiftConfirmation = async () => {
   const today = new Date().toISOString().slice(0, 10);
-  const isInWeekdays = WEEKS.includes(new Date().getDate());
+  const isInWeekdays = WEEKS.includes(new Date().getDay());
   const message = confirmMessage(
     isInWeekdays ? SHIFT : SHIFT_WEEKEND,
     today.slice(5, 10)
