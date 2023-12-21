@@ -1,3 +1,4 @@
+import { decemberRotation } from '../constants/decemberRotation.js';
 import { SHIFT, SHIFT_WEEKEND } from '../constants/events.js';
 import { TOGETHER_RANGE } from '../constants/sheet.js';
 import { confirmMessage } from '../messages/confirmMessage.js';
@@ -17,20 +18,10 @@ export const sendShiftConfirmation = async () => {
     today.slice(5, 10)
   );
 
-  const todayLibrarians = await getTodayLibrariansFromTogether(today);
+  const todayLibrarians = decemberRotation[today];
   const todayLibrariansId = await getLibrariansIdFromSheet(todayLibrarians);
 
   await Promise.all(todayLibrariansId.map((id) => sendBlocks(id, message)));
-};
-
-const getTodayLibrariansFromTogether = async (today) => {
-  const ratations = await httpClientForTogether
-    .get('/', { params: { month: new Date().getMonth() + 1 } })
-    .then((response) => response.data);
-
-  return ratations
-    .filter((ratation) => ratation.date.includes(today))
-    .map((ratation) => ratation.intraId);
 };
 
 const getLibrariansIdFromSheet = async (targets) => {
