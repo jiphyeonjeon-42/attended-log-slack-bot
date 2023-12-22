@@ -12,6 +12,7 @@ export const sendMeetingConfirmation = async () => {
   await Promise.all(
     librarians.map((librarian) => sendBlocks(librarian, message))
   );
+  console.log('meeting', librarians);
 };
 
 const getLibrariansFromSheet = async () => {

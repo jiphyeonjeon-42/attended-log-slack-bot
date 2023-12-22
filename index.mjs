@@ -13,6 +13,7 @@ export const handler = async (event) => {
     const trigger = event?.rawPath?.slice(1) ?? 'meetings';
     await Tasks[trigger](event);
   } catch (error) {
+    console.log(error);
     return {
       statusCode: 500,
       body: error.message,
