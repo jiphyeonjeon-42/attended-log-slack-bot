@@ -1,7 +1,11 @@
-import { MEETING } from '../constants/events.js';
+import {
+  MEETING,
+  MEETING_FALLBACK_MESSAGE,
+  MEETING_MESSAGE_DELAY,
+} from '../constants/events.js';
 import { SLACK_ID_RANGE } from '../constants/sheet.js';
 import { confirmMessage } from '../messages/confirmMessage.js';
-import { sendBlocks } from '../utils/slackChat.js';
+import { scheduleBlocks } from '../utils/slackChat.js';
 import { httpClientForSheet } from '../utils/httpClient.js';
 
 export const sendMeetingConfirmation = async () => {
@@ -10,7 +14,14 @@ export const sendMeetingConfirmation = async () => {
   const librarians = await getLibrariansFromSheet();
 
   await Promise.all(
-    librarians.map((librarian) => sendBlocks(librarian, message))
+    librarians.map((librarian) =>
+      scheduleBlocks(
+        librarian,
+        message,
+        MEETING_FALLBACK_MESSAGE,
+        MEETING_MESSAGE_DELAY
+      )
+    )
   );
   console.log('meeting', librarians);
 };
