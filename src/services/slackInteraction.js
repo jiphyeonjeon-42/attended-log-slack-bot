@@ -19,6 +19,7 @@ export const receiveSlackInteraction = async (event) => {
 
   await appendRecord(type, date, name).then(async () => {
     await sendBlocks(id, successMessage(type, date));
+    console.log('record appened', type, date, name);
   });
 };
 

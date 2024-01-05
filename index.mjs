@@ -11,6 +11,7 @@ const Tasks = {
 export const handler = async (event) => {
   try {
     const trigger = event?.rawPath?.slice(1) ?? 'meetings';
+    console.log(`Triggered by ${trigger}`);
     await Tasks[trigger](event);
   } catch (error) {
     console.log(error);
