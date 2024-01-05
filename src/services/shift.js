@@ -17,8 +17,8 @@ export const sendShiftConfirmation = async () => {
     today.slice(5, 10)
   );
 
-  const todayLibrarians = await getTodayLibrariansFromTogether();
-  const todayLibrariansId = await getLibrariansIdFromSheet(todayLibrarians);
+  const [todayLibrarians, todayLibrariansId] =
+    await getTodayLibrariansFromTogether();
 
   await Promise.all(todayLibrariansId.map((id) => sendBlocks(id, message)));
   console.log('shift', todayLibrarians);
@@ -29,20 +29,11 @@ const getTodayLibrariansFromTogether = async () => {
     .get('/')
     .then((response) => response.data);
 
-  return rotations
-    .filter(
-      ({ month, day }) =>
-        month === new Date().getMonth() + 1 && day === new Date().getDay()
-    )
-    .map((rotation) => rotation.intraId);
-};
-
-const getLibrariansIdFromSheet = async (targets) => {
-  const librarians = await httpClientForSheet
-    .get(`/${TOGETHER_RANGE}`)
-    .then((response) => response.data.values); // [[NAME, SLACK_ID], [NAME, SLACK_ID], ...] 형식으로 반환됨
-
-  return librarians
-    .filter((item) => targets.includes(item[0]))
-    .map((item) => item[1]);
+  return rotations.reduce(
+    ([name, slack], { nickname, slackMemberId }) => [
+      [...name, nickname],
+      [...slack, slackMemberId],
+    ],
+    [[], []]
+  );
 };
